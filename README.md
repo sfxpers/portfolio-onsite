@@ -26,7 +26,7 @@ Testing policy (seam-first layers, what not to add): [`docs/testing.md`](docs/te
 
 ## Deploy
 
-Production runs on Cloudflare Workers at [shayanameen.work](https://shayanameen.work) (see `docs/adr/0004-cloudflare-workers-hosting.md`).
+Production runs on Cloudflare Workers at [shayanameen.dev](https://shayanameen.dev) (see `docs/adr/0004-cloudflare-workers-hosting.md`).
 
 Git pushes to `main` deploy via Cloudflare **Workers Builds**; other branches upload preview versions. Local one-shot: `nub run deploy` (after `wrangler login`).
 
@@ -47,7 +47,7 @@ Workers Builds should define:
 
 | Variable                              | Purpose                                                                                |
 | ------------------------------------- | -------------------------------------------------------------------------------------- |
-| `VITE_SITE_ORIGIN`                    | Canonical origin (`https://shayanameen.work`) — keep in sync with Catalog `siteOrigin` |
+| `VITE_SITE_ORIGIN`                    | Canonical origin (`https://shayanameen.dev`) — keep in sync with Catalog `siteOrigin` |
 | `VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN` | Cloudflare Web Analytics beacon token                                                  |
 | `SKIP_DEPENDENCY_INSTALL`             | `true` (the Build command runs the pinned Nub install)                                 |
 

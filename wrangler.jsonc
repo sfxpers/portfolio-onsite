@@ -9,11 +9,11 @@
   },
   "routes": [
     {
-      "pattern": "shayanameen.work",
+      "pattern": "shayanameen.dev",
       "custom_domain": true,
     },
     {
-      "pattern": "www.shayanameen.work",
+      "pattern": "www.shayanameen.dev",
       "custom_domain": true,
     },
   ],
