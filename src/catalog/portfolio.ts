@@ -128,17 +128,6 @@ const resumeLocation = "Karachi, Pakistan";
 
 const experience: Experience[] = [
   {
-    title: "Product Engineer",
-    organization: "Ars Futura",
-    location: "Remote, Zagreb, Croatia",
-    dates: "Jan 2025 to Jul 2026",
-    bullets: [
-      "I build and ship features on long-running client products, across the interface, the API behind it, and the release.",
-      "I work inside client teams alongside their design and product people, on new builds and on codebases that arrive with history.",
-      "I review other engineers’ work and help set the conventions a new joiner picks up on the way in.",
-    ],
-  },
-  {
     title: "Freelance Software Engineer",
     organization: "Upwork",
     location: "Remote",
