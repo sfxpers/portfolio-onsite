@@ -127,14 +127,14 @@ const resumeLocation = "Karachi, Pakistan";
 
 const experience: Experience[] = [
   {
-    title: "Freelance Software Engineer",
-    organization: "Upwork",
+    title: "Product Engineer",
+    organization: "Ars Futura",
     location: "Remote",
-    dates: "Apr 2025 to Present",
+    dates: "Jan 2025 to Jul 2026",
     bullets: [
-      "I took client products from the first scoping call through release, deciding what to build as often as building it.",
-      "I delivered each one whole: the interface, the API behind it, and the admin tooling that staff needed to run the thing once it was live.",
-      "I was the only engineer on most of them, so the design calls, the data model, and the deployment were mine too.",
+      "I build and ship features on long-running client products, across the interface, the API behind it, and the release.",
+      "I work inside client teams alongside their design and product people, on new builds and on codebases that arrive with history.",
+      "I review other engineers’ work and help set the conventions a new joiner picks up on the way in.",
     ],
   },
   {
