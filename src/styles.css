@@ -2,26 +2,28 @@
 @import "@fontsource-variable/geist-mono";
 @import "tailwindcss";
 
+/* Every colour lives here. Teal is the one brand colour: links, focus, and the
+   page's primary action. Neutrals carry everything else. */
 :root {
   color-scheme: light dark;
-  --background: oklch(0.985 0.004 250);
-  --foreground: oklch(0.22 0.012 250);
-  --muted: oklch(0.96 0.006 250);
-  --muted-foreground: oklch(0.5 0.015 250);
-  --accent-ink: oklch(0.42 0.07 195);
-  --border: oklch(0.9 0.008 250);
-  --ring: oklch(0.42 0.07 195);
+  --background: oklch(0.99 0.002 250);
+  --foreground: oklch(0.21 0.012 250);
+  --muted: oklch(0.965 0.004 250);
+  --muted-foreground: oklch(0.48 0.014 250);
+  --primary: oklch(0.45 0.075 195);
+  --primary-foreground: oklch(0.99 0.002 250);
+  --border: oklch(0.9 0.006 250);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: oklch(0.18 0.012 250);
-    --foreground: oklch(0.96 0.004 250);
-    --muted: oklch(0.28 0.015 250);
-    --muted-foreground: oklch(0.7 0.015 250);
-    --accent-ink: oklch(0.72 0.07 195);
+    --background: oklch(0.17 0.01 250);
+    --foreground: oklch(0.95 0.004 250);
+    --muted: oklch(0.23 0.012 250);
+    --muted-foreground: oklch(0.72 0.014 250);
+    --primary: oklch(0.78 0.075 195);
+    --primary-foreground: oklch(0.17 0.01 250);
     --border: oklch(1 0 0 / 12%);
-    --ring: oklch(0.72 0.07 195);
   }
 }
 
@@ -32,38 +34,27 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent-ink: var(--accent-ink);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
   --color-border: var(--border);
-  --color-ring: var(--ring);
 }
 
-@utility label {
-  @apply font-mono text-[11px] tracking-wider uppercase;
+/* Dates, years, and index numbers: the only place Geist Mono appears. */
+@utility figure {
+  @apply font-mono text-xs text-muted-foreground tabular-nums;
 }
 
-@utility section-heading {
-  @apply label border-b border-border pb-2 text-muted-foreground;
+@utility button-primary {
+  @apply inline-flex h-10 items-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90;
 }
 
-@utility meta {
-  @apply font-mono text-[11px] text-muted-foreground;
-}
-
-@utility microcopy-link {
-  @apply meta tracking-wide inline-flex items-center gap-1 transition-colors;
-}
-
-@utility accent-link {
-  @apply microcopy-link text-accent-ink hover:text-foreground focus-visible:text-foreground;
-}
-
-@utility nav-link {
-  @apply transition-colors hover:text-accent-ink focus-visible:text-accent-ink;
+@utility link {
+  @apply text-primary underline-offset-4 hover:underline;
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
 
   html {
@@ -74,14 +65,8 @@
     @apply m-0 min-h-svh bg-background font-sans text-foreground antialiased;
   }
 
-  a:focus-visible,
-  button:focus-visible {
-    @apply outline-2 outline-offset-2 outline-ring;
-  }
-
-  button,
-  input {
-    font: inherit;
+  :focus-visible {
+    @apply rounded-sm outline-2 outline-offset-2 outline-primary;
   }
 
   @media (prefers-reduced-motion: reduce) {

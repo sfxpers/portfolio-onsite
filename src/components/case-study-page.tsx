@@ -1,48 +1,95 @@
 import { Link } from "@tanstack/react-router";
 
-import type { CaseStudy } from "@/catalog/portfolio";
+import { caseStudies, type CaseStudy } from "@/catalog/portfolio";
 import { PageShell } from "@/components/page-shell";
-import { ShowcaseArtifact } from "@/components/showcase-artifact";
 
 export function CaseStudyPage({ study }: { study: CaseStudy }) {
+  const next = caseStudies[(caseStudies.indexOf(study) + 1) % caseStudies.length] ?? study;
+
   return (
     <PageShell>
-      <Link to="/" className="mt-14 microcopy-link nav-link">
-        ← Home
-      </Link>
+      <nav aria-label="Breadcrumb" className="pt-8 text-sm text-muted-foreground">
+        <ol className="flex gap-2">
+          <li>
+            <Link to="/" className="hover:text-foreground">
+              Selected work
+            </Link>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" className="text-foreground">
+            {study.title}
+          </li>
+        </ol>
+      </nav>
 
-      <div className="mt-5 md:grid md:grid-cols-[minmax(12rem,14rem)_minmax(0,1fr)] md:gap-12 lg:gap-16">
-        <aside aria-label="Summary" className="md:sticky md:top-8 md:self-start">
-          <h1 className="text-2xl font-medium tracking-tight text-foreground">{study.title}</h1>
-          <dl className="mt-8 space-y-6 border-t border-foreground pt-6">
-            <CapsuleField label="Problem" value={study.capsule.problem} />
-            <CapsuleField label="Role" value={study.capsule.role} />
-            <CapsuleField label="Outcome" value={study.capsule.outcome} />
+      <div className="mt-6 md:grid md:grid-cols-12 md:gap-12">
+        <aside aria-label="Summary" className="md:sticky md:top-8 md:col-span-4 md:self-start">
+          <h1 className="text-3xl font-semibold tracking-tight">{study.title}</h1>
+          <p className="mt-2 figure">{study.year}</p>
+          <dl className="mt-6 border-b border-border text-sm">
+            {(
+              [
+                ["Problem", study.capsule.problem],
+                ["Role", study.capsule.role],
+                ["Outcome", study.capsule.outcome],
+              ] as const
+            ).map(([label, value]) => (
+              <div key={label} className="border-t border-border py-4">
+                <dt className="font-medium">{label}</dt>
+                <dd className="mt-1 leading-relaxed text-muted-foreground">{value}</dd>
+              </div>
+            ))}
           </dl>
         </aside>
 
-        <div className="mt-14 space-y-14 border-t border-foreground pt-8 md:mt-0 md:border-t-0 md:pt-0">
+        <div className="mt-12 space-y-12 md:col-span-8 md:mt-0">
           {study.body.map((block, index) =>
             block.type === "text" ? (
-              <section key={`text-${index}`} className="max-w-xl">
-                <h2 className="label text-muted-foreground">{block.heading}</h2>
-                <p className="mt-2 text-base leading-relaxed text-foreground/80">{block.body}</p>
+              <section key={index} className="max-w-prose">
+                <h2 className="text-lg font-semibold">{block.heading}</h2>
+                <p className="mt-2 leading-relaxed text-foreground/85">{block.body}</p>
               </section>
             ) : (
-              <ShowcaseArtifact key={`showcase-${index}`} showcase={block.showcase} />
+              <figure key={index}>
+                <a
+                  href={block.showcase.src}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Open full-size ${block.showcase.label} image`}
+                  className="block overflow-hidden rounded-md border border-border bg-muted"
+                >
+                  <img
+                    src={block.showcase.src}
+                    alt={block.showcase.alt}
+                    width={block.showcase.width}
+                    height={block.showcase.height}
+                    sizes="(min-width: 768px) 40rem, 100vw"
+                    loading="lazy"
+                    decoding="async"
+                    className="h-auto w-full"
+                  />
+                </a>
+                <figcaption className="mt-3 text-sm">
+                  <span className="font-medium">{block.showcase.label}.</span>{" "}
+                  <span className="text-muted-foreground">{block.showcase.caption}</span>
+                </figcaption>
+              </figure>
             ),
           )}
+
+          <Link
+            to="/work/$slug"
+            params={{ slug: next.slug }}
+            className="group block rounded-md border border-border p-5 transition-colors hover:bg-muted"
+          >
+            <span className="block text-sm text-muted-foreground">Next case study</span>
+            <span className="mt-1 block font-semibold group-hover:text-primary">
+              {next.title} →
+            </span>
+            <span className="mt-1 block text-sm text-muted-foreground">{next.indexSummary}</span>
+          </Link>
         </div>
       </div>
     </PageShell>
-  );
-}
-
-function CapsuleField({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <dt className="label text-muted-foreground">{label}</dt>
-      <dd className="mt-1.5 text-sm leading-relaxed text-foreground/80">{value}</dd>
-    </div>
   );
 }

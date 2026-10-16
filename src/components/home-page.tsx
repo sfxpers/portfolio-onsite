@@ -1,36 +1,53 @@
 import { Link } from "@tanstack/react-router";
 
 import { caseStudies, identity, profileHeading } from "@/catalog/portfolio";
-import { IdentityHeader } from "@/components/identity-header";
+import { RESUME_PDF_HREF, resumePdfDownloadName } from "@/catalog/resume-download";
 import { PageShell } from "@/components/page-shell";
-import { ProfileSection } from "@/components/profile-section";
+
+const email = identity.contact.find((link) => link.kind === "email");
 
 export function HomePage() {
   return (
     <PageShell>
-      <IdentityHeader label="Home" />
-      <ProfileSection heading={profileHeading} bio={identity.bio} />
+      <section aria-label={profileHeading} className="max-w-2xl py-12 sm:py-16">
+        <h1 className="text-3xl font-semibold tracking-tight">{identity.name}</h1>
+        <p className="mt-1 text-muted-foreground">{identity.role}</p>
+        <p className="mt-6 text-base leading-relaxed text-foreground/85">{identity.bio}</p>
+        <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+          {email ? (
+            <a href={email.href} className="button-primary">
+              Email me
+            </a>
+          ) : null}
+          <a href={RESUME_PDF_HREF} download={resumePdfDownloadName()} className="link text-sm">
+            Download resume (PDF)
+          </a>
+        </div>
+      </section>
 
-      <section aria-label="Selected work" className="mt-10">
-        <h2 className="section-heading">Selected work</h2>
-        <ol>
+      <section aria-labelledby="selected-work">
+        <h2 id="selected-work" className="border-b border-border pb-3 text-sm font-semibold">
+          Selected work
+        </h2>
+        <ol className="divide-y divide-border border-b border-border">
           {caseStudies.map((study, index) => (
-            <li key={study.slug} className="border-b border-border">
+            <li key={study.slug}>
               <Link
                 to="/work/$slug"
                 params={{ slug: study.slug }}
-                className="group grid w-full grid-cols-[2rem_minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 px-3 py-2.5 text-left transition-colors hover:bg-muted/60 focus-visible:bg-muted/60 sm:grid-cols-[2rem_minmax(0,12rem)_1fr_auto] sm:gap-y-0 sm:px-4 sm:py-4"
+                className="group grid grid-cols-12 gap-x-4 gap-y-1 py-5 transition-colors hover:bg-muted sm:px-3"
               >
-                <span className="meta">{String(index + 1).padStart(2, "0")}</span>
-                <span className="text-base font-medium text-foreground transition-colors group-hover:text-accent-ink group-focus-visible:text-accent-ink">
+                <span className="col-span-2 figure pt-1 sm:col-span-1">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="col-span-8 font-semibold group-hover:text-primary sm:col-span-3">
                   {study.title}
                 </span>
-                <span className="meta sm:hidden">{study.year}</span>
-                <span className="col-span-2 col-start-2 text-sm text-muted-foreground sm:col-span-1 sm:col-start-auto">
-                  {study.indexSummary}
-                </span>
-                <span className="hidden meta sm:col-start-auto sm:block sm:pt-0.5">
+                <span className="col-span-2 figure pt-1 text-right sm:order-last sm:col-span-1">
                   {study.year}
+                </span>
+                <span className="col-span-10 col-start-3 text-sm text-muted-foreground sm:col-span-7 sm:col-start-auto">
+                  {study.indexSummary}
                 </span>
               </Link>
             </li>
