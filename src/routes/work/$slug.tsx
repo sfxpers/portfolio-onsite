@@ -14,30 +14,19 @@ export const Route = createFileRoute("/work/$slug")({
     }
     return { study };
   },
-  loader: ({ context }) => {
-    return { study: context.study };
-  },
-  head: ({ loaderData }) => {
-    const study = loaderData?.study;
+  head: ({ params }) => {
+    const study = getCaseStudyBySlug(params.slug);
     if (!study) {
-      return {
-        meta: [{ title: `Case study not found - ${identity.name}` }],
-      };
+      return { meta: [{ title: `Case study not found - ${identity.name}` }] };
     }
     return {
       meta: [
         { title: `${study.title} case study - ${identity.name}` },
-        {
-          name: "description",
-          content: `${study.indexSummary}. ${study.capsule.outcome}`,
-        },
+        { name: "description", content: `${study.indexSummary}. ${study.capsule.outcome}` },
       ],
     };
   },
-  component: () => {
-    const { study } = Route.useLoaderData();
-    return <CaseStudyPage study={study} />;
-  },
+  component: () => <CaseStudyPage study={Route.useRouteContext().study} />,
   notFoundComponent: CaseStudyNotFound,
 });
 

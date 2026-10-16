@@ -1,6 +1,6 @@
 import { getResume, identity, positioning, profileHeading } from "@/catalog/portfolio";
 
-export type ExperienceViewItem = {
+type ExperienceViewItem = {
   title: string;
   /** Pre-formatted "organization / location" line, identical in both views. */
   subtitle: string;
@@ -8,7 +8,7 @@ export type ExperienceViewItem = {
   bullets: string[];
 };
 
-export type ProjectViewItem = {
+type ProjectViewItem = {
   title: string;
   summary: string;
   /** Site-relative path — the on-site page routes it; print absolutizes it. */
@@ -17,13 +17,13 @@ export type ProjectViewItem = {
   linkLabel: string;
 };
 
-export type SkillViewGroup = {
+type SkillViewGroup = {
   label: string;
   /** Pre-joined items line, identical in both views. */
   line: string;
 };
 
-export type EducationViewItem = {
+type EducationViewItem = {
   /** Pre-formatted "degree, institution" line, identical in both views. */
   degreeLine: string;
   dates: string;
@@ -38,7 +38,7 @@ export type ResumeSection =
   | { kind: "languages"; heading: string; line: string }
   | { kind: "education"; heading: string; items: EducationViewItem[] };
 
-export type ResumeView = ResumeSection[];
+type ResumeView = ResumeSection[];
 
 /**
  * The Resume view: the single structural description of the Resume — ordered

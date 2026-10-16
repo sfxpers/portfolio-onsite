@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vite-plus/test";
 
 import { getResume, identity, siteOrigin } from "@/catalog/portfolio";
 import { renderResumePrintHtml } from "@/catalog/resume-print-html";
@@ -39,12 +39,8 @@ describe("Resume print adapter", () => {
     expect(html).not.toMatch(new RegExp(`${project!.title}[\\s\\S]{0,200}<ul>`));
   });
 
-  it("stays degree-only and escapes HTML in catalog strings", () => {
-    const html = renderResumePrintHtml();
+  it("escapes HTML in Catalog strings", () => {
     const [edu] = getResume().education;
-    expect(edu).toBeDefined();
-    expect(html).toContain(edu!.institution.replaceAll("&", "&amp;"));
-    expect(html).not.toContain("Intermediate");
-    expect(html).not.toContain("Matriculation");
+    expect(renderResumePrintHtml()).toContain(edu!.institution.replaceAll("&", "&amp;"));
   });
 });

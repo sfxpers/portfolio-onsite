@@ -2,7 +2,7 @@
 
 ### Issue tracker
 
-Issues and PRDs are tracked in GitHub Issues for this repository. See `docs/agents/issue-tracker.md`.
+Issues and specs are tracked in GitHub Issues for this repository. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 

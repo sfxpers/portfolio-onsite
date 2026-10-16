@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 import { identity, positioning } from "@/catalog/portfolio";
 import { CloudflareWebAnalytics } from "@/components/cloudflare-web-analytics";
 import { NotFoundPanel } from "@/components/not-found-panel";
-import { SystemColorScheme } from "@/components/system-color-scheme";
 
 import styles from "../styles.css?url";
 
@@ -29,12 +28,11 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <head>
         <HeadContent />
       </head>
       <body>
-        <SystemColorScheme />
         {children}
         <CloudflareWebAnalytics />
         <Scripts />

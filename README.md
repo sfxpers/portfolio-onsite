@@ -4,59 +4,57 @@ Personal product-engineer portfolio for Shayan: Home (work index), Case Studies,
 
 ## Setup
 
-```bash
-mise install
-mise run setup
-nub run dev
-```
+[Vite+](https://viteplus.dev) (`vp`) runs everything: it uses the Node in `.node-version` and the pnpm in `package.json`, and ships Vite, Vitest, Oxlint, and Oxfmt as one set, pinned in `pnpm-workspace.yaml`. `vp install` also sets up the pre-commit hook, which checks what is staged.
 
-The project uses Node 24 LTS and Nub 0.7.5. The committed `nub.lock` makes installs reproducible.
+```sh
+curl -fsSL https://vite.plus | bash   # once per machine
+vp install
+vp exec playwright install chromium webkit
+vp dev                                # http://localhost:3000
+```
 
 ## Commands
 
-- `nub run dev` starts the development server.
-- `nub run build` creates a Cloudflare Workers production build.
-- `nub run preview` previews the production build locally (Vite).
-- `nub run deploy` builds and deploys with Wrangler (`wrangler login` first).
-- `nub run test` runs unit and end-to-end tests.
-- `nub run check` runs type checking, linting, formatting checks, and unit and end-to-end tests (the e2e run builds the app, so a broken production build fails `check`).
-- `nub run resume:pdf` regenerates the committed Resume PDF after Catalog changes; `nub run check` fails if it drifts.
+```sh
+vp check              # format, lint, and type check (vp check --fix to fix)
+vp test               # Vitest: Catalog rules, the print adapter, and the committed PDF
+vp run test:e2e       # builds, then Playwright and axe against the preview server
+vp build              # Cloudflare Workers production build
+vp preview            # the production build, locally
+vp run resume:pdf     # regenerate public/resume/download.pdf after Catalog changes
+vp run deploy         # build and deploy with Wrangler (vp exec wrangler login first)
+```
 
-Testing policy (seam-first layers, what not to add): [`docs/testing.md`](docs/testing.md).
+`vp test` fails when the committed Resume PDF drifts from the Catalog. Testing policy (seam-first layers, what not to add): [`docs/testing.md`](docs/testing.md).
 
 ## Deploy
 
 Production runs on Cloudflare Workers at [shayanameen.dev](https://shayanameen.dev) (see `docs/adr/0004-cloudflare-workers-hosting.md`).
 
-Git pushes to `main` deploy via Cloudflare **Workers Builds**; other branches upload preview versions. Local one-shot: `nub run deploy` (after `wrangler login`).
+Git pushes to `main` deploy via Cloudflare **Workers Builds**; other branches upload preview versions. Workers Builds installs the committed `pnpm-lock.yaml` with the pnpm in `package.json`, then runs the package scripts, which call the `vp` that `vite-plus` installs. It is configured in the Cloudflare dashboard under the Worker's **Settings → Build**:
 
-Workers Builds is configured in the Cloudflare dashboard under the Worker's **Settings → Build**:
-
-| Setting                              | Value                    |
-| ------------------------------------ | ------------------------ |
-| Production branch                    | `main`                   |
-| Build command                        | `nub ci`                 |
-| Deploy command                       | `nub run deploy`         |
-| Non-production branch builds         | Enabled                  |
-| Non-production branch deploy command | `nub run deploy:preview` |
-| Root directory                       | _(repository root)_      |
-
-Workers Builds installs the committed lockfile with Nub before running the package scripts. The package scripts own the Vite build so production and preview uploads use the same build path. Run `nub run deploy:preview` to upload a preview version manually.
+| Setting                              | Value                     |
+| ------------------------------------ | ------------------------- |
+| Production branch                    | `main`                    |
+| Build command                        | _(empty)_                 |
+| Deploy command                       | `pnpm run deploy`         |
+| Non-production branch builds         | Enabled                   |
+| Non-production branch deploy command | `pnpm run deploy:preview` |
+| Root directory                       | _(repository root)_       |
 
 Workers Builds should define:
 
-| Variable                              | Purpose                                                                                |
-| ------------------------------------- | -------------------------------------------------------------------------------------- |
+| Variable                              | Purpose                                                                               |
+| ------------------------------------- | ------------------------------------------------------------------------------------- |
 | `VITE_SITE_ORIGIN`                    | Canonical origin (`https://shayanameen.dev`) — keep in sync with Catalog `siteOrigin` |
-| `VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN` | Cloudflare Web Analytics beacon token                                                  |
-| `SKIP_DEPENDENCY_INSTALL`             | `true` (the Build command runs the pinned Nub install)                                 |
+| `VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN` | Cloudflare Web Analytics beacon token                                                 |
 
-After changing `siteOrigin` or Catalog facts that appear in the PDF, run `nub run resume:pdf` and commit the result.
+After changing `siteOrigin` or Catalog facts that appear in the PDF, run `vp run resume:pdf` and commit the result.
 
 ## Stack
 
 - TanStack Start with file-based routing on Cloudflare Workers (`@cloudflare/vite-plugin` + Wrangler)
 - Tailwind CSS with locally defined semantic tokens
-- Oxlint, Oxfmt, Vitest, Playwright, and axe
+- Vite+ (Vite, Vitest, Oxlint, Oxfmt), Playwright, and axe
 
-Domain language: `CONTEXT.md`. Product contract: `docs/adr/0001-craft-logbook-visual-direction.md`. Copy voice: `docs/adr/0003-plain-concrete-copy-voice.md`.
+Domain language: `GLOSSARY.md`. Product contract: `docs/adr/0001-craft-logbook-visual-direction.md`. Copy voice: `docs/adr/0003-plain-concrete-copy-voice.md`.

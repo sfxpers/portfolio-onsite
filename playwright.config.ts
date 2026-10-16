@@ -16,7 +16,7 @@ export default defineConfig({
     { name: "webkit", use: { ...devices["Desktop Safari"] } },
   ],
   webServer: {
-    command: "nub run preview --host 127.0.0.1",
+    command: "vp preview --host 127.0.0.1",
     reuseExistingServer: !process.env.CI,
     stderr: "pipe",
     stdout: "pipe",

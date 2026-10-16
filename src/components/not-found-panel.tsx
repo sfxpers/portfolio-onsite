@@ -5,12 +5,12 @@ import { PageShell } from "@/components/page-shell";
 export function NotFoundPanel({ title, description }: { title: string; description: string }) {
   return (
     <PageShell>
-      <div className="mt-14 space-y-4">
-        <p className="label text-muted-foreground">Not found</p>
-        <h1 className="text-xl font-medium tracking-tight text-foreground">{title}</h1>
-        <p className="max-w-md text-sm leading-relaxed text-muted-foreground">{description}</p>
-        <Link to="/" className="accent-link">
-          ← Home
+      <div className="max-w-xl py-16">
+        <p className="figure">404</p>
+        <h1 className="mt-2 text-3xl font-semibold tracking-tight">{title}</h1>
+        <p className="mt-4 leading-relaxed text-muted-foreground">{description}</p>
+        <Link to="/" className="mt-8 button-primary">
+          Go to the home page
         </Link>
       </div>
     </PageShell>
