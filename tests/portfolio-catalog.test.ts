@@ -33,7 +33,7 @@ describe("portfolio catalog", () => {
       expect(group.label.length).toBeGreaterThan(0);
       expect(group.items.length).toBeGreaterThan(0);
     }
-    // Grouping buys breadth, not licence for a laundry list. See CONTEXT.md.
+    // Grouping buys breadth, not licence for a laundry list. See GLOSSARY.md.
     const skillCount = resume.skills.reduce((total, group) => total + group.items.length, 0);
     expect(skillCount).toBeLessThanOrEqual(24);
 

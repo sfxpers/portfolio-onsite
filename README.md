@@ -57,4 +57,4 @@ After changing `siteOrigin` or Catalog facts that appear in the PDF, run `vp run
 - Tailwind CSS with locally defined semantic tokens
 - Vite+ (Vite, Vitest, Oxlint, Oxfmt), Playwright, and axe
 
-Domain language: `CONTEXT.md`. Product contract: `docs/adr/0001-craft-logbook-visual-direction.md`. Copy voice: `docs/adr/0003-plain-concrete-copy-voice.md`.
+Domain language: `GLOSSARY.md`. Product contract: `docs/adr/0001-craft-logbook-visual-direction.md`. Copy voice: `docs/adr/0003-plain-concrete-copy-voice.md`.
