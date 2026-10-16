@@ -22,3 +22,7 @@ test-results/
 .idea/
 .vscode/
 .worktrees/
+.vitest/
+
+# The review pass: report, screenshots, and their tooling, never committed
+.review/
