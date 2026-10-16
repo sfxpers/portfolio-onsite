@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "deploy": "vp build && wrangler deploy",
-    "deploy:preview": "vp build && wrangler versions upload",
+    "deploy:preview": "vp build && wrangler preview",
     "prepare": "vp config",
     "resume:pdf": "node scripts/generate-resume-pdf.mjs",
     "test:e2e": "vp build && playwright test"
