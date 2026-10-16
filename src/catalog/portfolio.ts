@@ -106,9 +106,9 @@ export const profileHeading = "Profile";
 
 /**
  * Canonical public origin for absolute links in the Resume PDF download.
- * Override with `VITE_SITE_ORIGIN` in Workers Builds when the hostname changes.
+ * Override with the `VITE_SITE_ORIGIN` repository variable when the hostname changes.
  */
-export const siteOrigin = (import.meta.env?.VITE_SITE_ORIGIN ?? "https://shayanameen.dev").replace(
+export const siteOrigin = (import.meta.env?.VITE_SITE_ORIGIN || "https://shayanameen.dev").replace(
   /\/$/,
   "",
 );

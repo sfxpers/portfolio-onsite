@@ -17,39 +17,36 @@ vp dev                                # http://localhost:3000
 
 ```sh
 vp check              # format, lint, and type check (vp check --fix to fix)
-vp test               # Vitest: Catalog rules, the print adapter, and the committed PDF
+vp test               # Vitest: Catalog rules, the print adapter, and the committed PDF (bytes on Linux only)
 vp run test:e2e       # builds, then Playwright and axe against the preview server
 vp build              # Cloudflare Workers production build
 vp preview            # the production build, locally
-vp run resume:pdf     # regenerate public/resume/download.pdf after Catalog changes
+vp run resume:pdf     # print public/resume/download.pdf locally, to preview Catalog changes
 vp run deploy         # build and deploy with Wrangler (vp exec wrangler login first)
 ```
 
-`vp test` fails when the committed Resume PDF drifts from the Catalog. Testing policy (seam-first layers, what not to add): [`docs/testing.md`](docs/testing.md).
+The committed Resume PDF is a Linux print. Chromium prints different bytes on macOS, even with Geist embedded, so `vp test` compares bytes only on Linux and skips that comparison on a Mac. CI enforces it: Check fails when the committed PDF drifts from the Catalog.
+
+CI ([`.github/workflows/check.yml`](.github/workflows/check.yml)) runs `vp check`, `vp test run`, and `vp run test:e2e` on Ubuntu for every pull request and every push to `main`. [`.github/workflows/resume-pdf.yml`](.github/workflows/resume-pdf.yml), run by hand from the Actions tab on a branch, prints the PDF on Linux, commits it to that branch if it changed, and starts Check on the new commit. Testing policy (seam-first layers, what not to add): [`docs/testing.md`](docs/testing.md).
 
 ## Deploy
 
 Production runs on Cloudflare Workers at [shayanameen.dev](https://shayanameen.dev) (see `docs/adr/0004-cloudflare-workers-hosting.md`).
 
-Git pushes to `main` deploy via Cloudflare **Workers Builds**; other branches upload preview versions. Workers Builds installs the committed `pnpm-lock.yaml` with the pnpm in `package.json`, then runs the package scripts, which call the `vp` that `vite-plus` installs. It is configured in the Cloudflare dashboard under the Worker's **Settings → Build**:
+GitHub Actions deploys: the `deploy` job in [`.github/workflows/check.yml`](.github/workflows/check.yml) runs `vp run deploy` on every push to `main`, and only after Check passes, so a change whose tests fail never reaches production. Pull requests are checked, not deployed. Cloudflare builds nothing itself: the Worker is not connected to Git.
 
-| Setting                              | Value                     |
-| ------------------------------------ | ------------------------- |
-| Production branch                    | `main`                    |
-| Build command                        | _(empty)_                 |
-| Deploy command                       | `pnpm run deploy`         |
-| Non-production branch builds         | Enabled                   |
-| Non-production branch deploy command | `pnpm run deploy:preview` |
-| Root directory                       | _(repository root)_       |
+The job reads these from the repository's **Settings → Secrets and variables → Actions**:
 
-Workers Builds should define:
+| Name                                  | Kind     | Purpose                                                                    |
+| ------------------------------------- | -------- | -------------------------------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN`                | Secret   | User API token from the "Edit Cloudflare Workers" template, Work account   |
+| `CLOUDFLARE_ACCOUNT_ID`               | Variable | The Work account                                                           |
+| `VITE_SITE_ORIGIN`                    | Variable | Optional; overrides the Catalog's `siteOrigin` (`https://shayanameen.dev`) |
+| `VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN` | Variable | Optional; Cloudflare Web Analytics beacon token                            |
 
-| Variable                              | Purpose                                                                               |
-| ------------------------------------- | ------------------------------------------------------------------------------------- |
-| `VITE_SITE_ORIGIN`                    | Canonical origin (`https://shayanameen.dev`) — keep in sync with Catalog `siteOrigin` |
-| `VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN` | Cloudflare Web Analytics beacon token                                                 |
+`vp run deploy` also works from a laptop after `vp exec wrangler login`.
 
-After changing `siteOrigin` or Catalog facts that appear in the PDF, run `vp run resume:pdf` and commit the result.
+After changing `siteOrigin` or Catalog facts that appear in the PDF, push the branch and run the Resume PDF workflow on it (Actions → Resume PDF → Run workflow, or `gh workflow run resume-pdf.yml --ref <branch>`), then pull its commit. Don't commit a PDF printed on a Mac: Check on Linux would fail it.
 
 ## Stack
 

@@ -6,7 +6,7 @@ Seam-first: Vitest covers public module seams; Playwright covers pages after a r
 
 - Catalog **product rules** (contact, bands, degree-only education, Projects projection, technical depth, body alternation) — not biography or URL literals
 - Resume print-HTML smoke (headings, absolute project links, escapes)
-- Committed Resume PDF byte-lock (`vp run resume:pdf` regenerates it; `vp test` fails on drift)
+- Committed Resume PDF byte-lock: the PDF is a Linux print from `.github/workflows/resume-pdf.yml`; `vp test` fails on drift on Linux (CI) and skips the byte comparison elsewhere. The one-page check runs everywhere
 
 ## Playwright owns
 
