@@ -1,0 +1,40 @@
+name: Resume PDF
+
+# Prints public/resume/download.pdf on Linux, where Check enforces its
+# byte-lock (ADR-0002), and commits it to the branch picked under
+# "Use workflow from" if it changed.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  # To start Check on the new commit.
+  actions: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      # The v1 tag is frozen and no longer moves.
+      - uses: voidzero-dev/setup-vp@v1.21.2
+        with:
+          node-version-file: .node-version
+          cache: true
+      - run: vp exec playwright install --with-deps chromium
+      - run: vp run resume:pdf
+      - name: Commit the PDF if it changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- public/resume/download.pdf; then
+            echo "The committed PDF already matches the Linux print."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit --no-verify -m "Regenerate the Resume PDF on Linux" -- public/resume/download.pdf
+          git push origin "HEAD:$GITHUB_REF_NAME"
+          # A push with GITHUB_TOKEN starts no workflows, so start Check here.
+          gh workflow run check.yml --ref "$GITHUB_REF_NAME"

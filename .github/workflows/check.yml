@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  # Started by resume-pdf.yml after it commits a new PDF.
+  workflow_dispatch:
 
 jobs:
   check:
