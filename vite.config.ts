@@ -25,7 +25,7 @@ export default defineConfig({
   },
   run: {
     tasks: {
-      "check:tokens": "node scripts/check-tokens.mjs --spacing",
+      "check:tokens": "node scripts/check-tokens.mjs",
     },
   },
   resolve: { tsconfigPaths: true },
