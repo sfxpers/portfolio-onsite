@@ -3,8 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "vp dev",
+    "build": "vp build",
+    "preview": "vp preview",
     "deploy": "vp build && wrangler deploy",
+    "cf-typegen": "wrangler types",
     "prepare": "vp config",
+    "postinstall": "wrangler types",
     "resume:pdf": "node scripts/generate-resume-pdf.mjs",
     "test:smoke": "vp build && playwright test"
   },
