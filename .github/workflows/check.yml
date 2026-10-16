@@ -20,6 +20,7 @@ jobs:
           node-version-file: .node-version
           cache: true
       - run: vp check
+      - run: vp run check:tokens
       # Before Vitest too: the Resume PDF test prints through Chromium.
       - run: vp exec playwright install --with-deps chromium webkit
       - run: vp test run

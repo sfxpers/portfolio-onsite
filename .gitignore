@@ -23,3 +23,6 @@ test-results/
 .vscode/
 .worktrees/
 .vitest/
+
+# Local review notes and screenshots
+.review/

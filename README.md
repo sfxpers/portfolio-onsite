@@ -17,6 +17,7 @@ vp dev                                # http://localhost:3000
 
 ```sh
 vp check              # format, lint, and type check (vp check --fix to fix)
+vp run check:tokens   # UI colours and sizes come from src/styles.css
 vp test               # Vitest: Catalog rules, the print adapter, and the committed PDF (bytes on Linux only)
 vp run test:e2e       # builds, then Playwright and axe against the preview server
 vp build              # Cloudflare Workers production build
@@ -27,7 +28,7 @@ vp run deploy         # build and deploy with Wrangler (vp exec wrangler login f
 
 The committed Resume PDF is a Linux print. Chromium prints different bytes on macOS, even with Geist embedded, so `vp test` compares bytes only on Linux and skips that comparison on a Mac. CI enforces it: Check fails when the committed PDF drifts from the Catalog.
 
-CI ([`.github/workflows/check.yml`](.github/workflows/check.yml)) runs `vp check`, `vp test run`, and `vp run test:e2e` on Ubuntu for every pull request and every push to `main`. [`.github/workflows/resume-pdf.yml`](.github/workflows/resume-pdf.yml), run by hand from the Actions tab on a branch, prints the PDF on Linux, commits it to that branch if it changed, and starts Check on the new commit. Testing policy (seam-first layers, what not to add): [`docs/testing.md`](docs/testing.md).
+CI ([`.github/workflows/check.yml`](.github/workflows/check.yml)) runs `vp check`, `vp run check:tokens`, `vp test run`, and `vp run test:e2e` on Ubuntu for every pull request and every push to `main`. [`.github/workflows/resume-pdf.yml`](.github/workflows/resume-pdf.yml), run by hand from the Actions tab on a branch, prints the PDF on Linux, commits it to that branch if it changed, and starts Check on the new commit. Testing policy (seam-first layers, what not to add): [`docs/testing.md`](docs/testing.md).
 
 ## Deploy
 

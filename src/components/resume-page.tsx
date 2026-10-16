@@ -55,7 +55,7 @@ function SectionBody({ section }: { section: ResumeSection }) {
             <li key={`${item.title}-${item.dates}`}>
               <Entry title={item.title} aside={<span className="figure">{item.dates}</span>} />
               <p className="text-sm text-muted-foreground">{item.subtitle}</p>
-              <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-foreground/85">
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-foreground/85">
                 {item.bullets.map((bullet) => (
                   <li key={bullet}>{bullet}</li>
                 ))}
