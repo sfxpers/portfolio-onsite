@@ -17,17 +17,17 @@ vp dev                                # http://localhost:3000
 
 ```sh
 vp check              # format, lint, and type check (vp check --fix to fix)
-vp test               # Vitest: Catalog rules, the print adapter, and the committed PDF
+vp test               # Vitest: Catalog rules, the print adapter, and the committed PDF (bytes on Linux only)
 vp run test:e2e       # builds, then Playwright and axe against the preview server
 vp build              # Cloudflare Workers production build
 vp preview            # the production build, locally
-vp run resume:pdf     # regenerate public/resume/download.pdf after Catalog changes
+vp run resume:pdf     # print public/resume/download.pdf locally, to preview Catalog changes
 vp run deploy         # build and deploy with Wrangler (vp exec wrangler login first)
 ```
 
-`vp test` fails when the committed Resume PDF drifts from the Catalog. The PDF embeds Geist rather than using system fonts, but Chromium still prints different bytes on Linux, so regenerate it on macOS.
+The committed Resume PDF is a Linux print. Chromium prints different bytes on macOS, even with Geist embedded, so `vp test` compares bytes only on Linux and skips that comparison on a Mac. CI enforces it: Check fails when the committed PDF drifts from the Catalog.
 
-CI ([`.github/workflows/check.yml`](.github/workflows/check.yml)) runs `vp check`, `vp test run`, and `vp run test:e2e` on macOS for every pull request and every push to `main`. Testing policy (seam-first layers, what not to add): [`docs/testing.md`](docs/testing.md).
+CI ([`.github/workflows/check.yml`](.github/workflows/check.yml)) runs `vp check`, `vp test run`, and `vp run test:e2e` on Ubuntu for every pull request and every push to `main`. [`.github/workflows/resume-pdf.yml`](.github/workflows/resume-pdf.yml), run by hand from the Actions tab on a branch, prints the PDF on Linux, commits it to that branch if it changed, and starts Check on the new commit. Testing policy (seam-first layers, what not to add): [`docs/testing.md`](docs/testing.md).
 
 ## Deploy
 
@@ -51,7 +51,7 @@ Workers Builds should define:
 | `VITE_SITE_ORIGIN`                    | Canonical origin (`https://shayanameen.dev`) — keep in sync with Catalog `siteOrigin` |
 | `VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN` | Cloudflare Web Analytics beacon token                                                 |
 
-After changing `siteOrigin` or Catalog facts that appear in the PDF, run `vp run resume:pdf` and commit the result.
+After changing `siteOrigin` or Catalog facts that appear in the PDF, push the branch and run the Resume PDF workflow on it (Actions → Resume PDF → Run workflow, or `gh workflow run resume-pdf.yml --ref <branch>`), then pull its commit. Don't commit a PDF printed on a Mac: Check on Linux would fail it.
 
 ## Stack
 
