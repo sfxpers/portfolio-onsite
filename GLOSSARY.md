@@ -1,57 +1,57 @@
 # Portfolio
 
-Personal developer portfolio for Shayan: projects presented as Case Studies on a showcase-heavy Craft Logbook site, with a Resume credentials surface for hiring skim and a PDF download.
+Personal developer portfolio for Shayan: Case Studies on a Craft Logbook site, and a Resume with a PDF of the same facts.
 
 ## Language
 
 **Case Study**:
-A project page built from a Capsule and a body of short narrative blocks with Showcase sections. Proof lives in the artifacts; text explains problem, constraints, and outcome, not chapters.
-_Avoid_: Essay, article, long-form writeup, blog post, showcase-only gallery, rigid multi-section template without visual proof
+A project page made of a Capsule, short narrative, and Showcase sections. The proof is in the artifacts.
+_Avoid_: Essay, article, blog post, gallery
 
 **Capsule**:
-The scannable Case Study summary (problem, role, and outcome) so a hiring-first reader can skim the point. Technical depth follows for peers without being required to get it.
-_Avoid_: Manifesto intro, long abstract, pull-quote opener, peer-only jargon in the first screen, Capsule as a long top-of-page essay block
+The scannable summary of a Case Study: problem, role, and outcome.
+_Avoid_: Abstract, introduction, pull-quote
 
 **Showcase**:
-Visual or interactive proof of the work (product UI, recordings, diagrams, live demos, code diffs) used as a first-class part of a Case Study, not decoration around a wall of text. Default is artifact-first; interactive demos are optional and reserved for flagship cases that need them.
-_Avoid_: Hero illustration, stock photography, abstract gradient mesh as the main visual, demo-obligatory portfolio
+The visual or interactive proof inside a Case Study.
+_Avoid_: Illustration, decoration, stock photography
 
 **Craft Logbook**:
-The site's overall product direction: a personal index of work that opens into Case Studies, signaling developer-built craft through restraint and systems thinking, not agency marketing or editorial branding.
-_Avoid_: Editorial, magazine layout, designer-for-hire folio, SaaS marketing landing page, dark-as-identity / purple-glow "dev cosplay", display serif heroes, gradient brand themes, terracotta-on-cream, parallax/scroll-hijack heroes
+This site: a personal index of work that opens into Case Studies.
+_Avoid_: Magazine, folio, landing page
 
 **Voice**:
-The single register every user-facing string is written in: plain and concrete, the author as the actor, naming what a product is before how it was built (see ADR-0003).
-_Avoid_: systems-analyst abstraction, agentless passive, boundary / surface / product system as house words, Decision–Constraint–Trade-off scaffolding, Title Case in UI labels, a different positioning claim per page, a domain generalised from whichever Case Studies happen to be published
+The register of the copy: plain, concrete, and in the author's voice.
+_Avoid_: Passive voice, Title Case
 
 **Identity**:
-The shared person record: name, "Product Engineer" role, bio, and chrome contact (Email, Threads, X). Location is Resume-only and not part of Identity.
-_Avoid_: About, author byline, personal brand blurb, "design engineer" as the primary role label
+The shared person record: name, role, bio, and contact. Location belongs to the Resume.
+_Avoid_: About, byline, personal brand
 
 **Catalog**:
-The single source of portfolio facts (Identity, Case Studies, Resume sections). On-site pages and the PDF download are views of it, not separate records.
-_Avoid_: CMS, content database, duplicated page-local copy, hand-maintained download distinct from the site
+The portfolio's facts: Identity, Case Studies, and the Resume. A page and the PDF are views of it.
+_Avoid_: CMS, content database
 
 **Profile**:
-The on-page section that presents Identity (and location when shown on Resume).
-_Avoid_: About, bio essay, dedicated /about page
+The on-page presentation of Identity.
+_Avoid_: About, bio
 
 **Home**:
-The landing surface: Identity plus the work index of Case Studies. Contact stays in chrome; Writing is out of scope.
-_Avoid_: Work-only home, manifesto hero, cryptic craft-only landing, tall about-me first screen, card-grid project gallery, blog/writing index, contact-form page
+The landing page: Identity and the index of Case Studies.
+_Avoid_: Manifesto, gallery, blog
 
 **Resume**:
-The credentials surface for hiring skim: Profile, Experience, Projects, Skills grouped into a few labelled bands, Languages, degree-only Education, and a PDF download of the same Catalog facts.
-_Avoid_: About, CV as the site word, thin bio-only page, career timeline as the product, ATS download, second PDF narrative, Craft Logbook styling in the PDF, multi-page PDF, outcome bullets or Showcases on Resume, full school history below degree, skills laundry list, /about redirect
+The credentials page for a hiring skim, and a PDF of the same Catalog facts.
+_Avoid_: CV, About, timeline
 
 **Resume view**:
-The single structural description of the Resume — ordered sections with headings and content strings — that the on-site Resume page and the print/PDF adapter both render. Derived from the Catalog on every call; not a third record.
-_Avoid_: section order or headings encoded in a view, Resume structure duplicated per adapter
+The ordered Resume sections, taken from the Catalog, that the page and the PDF both render.
+_Avoid_: A second Resume
 
 **Experience**:
-A paid or engaged position on the Resume: title, organization, location, date range, and short ownership bullets. Describes what was owned in that engagement; not a Case Study and not Capsule role.
-_Avoid_: Role (as the Resume noun), job card, employment essay, collapsing Experience into Projects
+A position on the Resume: title, organization, location, dates, and what was owned.
+_Avoid_: Role, job card
 
 **Projects**:
-Resume entries projected from Case Studies: title, index summary, and link — no outcome bullets or Showcases.
-_Avoid_: Second Case Study body, portfolio gallery cards, outcome bullets on Resume
+Resume entries taken from Case Studies: title, summary, and link.
+_Avoid_: A second Case Study

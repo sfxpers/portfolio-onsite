@@ -4,11 +4,11 @@ The judgement calls a reviewer checks. Anything mechanical is a check instead: `
 
 ## Sources of truth
 
-GitHub Issues, then `docs/adr/`, then `GLOSSARY.md`. Code is never one. Name things with the glossary's terms and none of its _Avoid_ words. A change that contradicts an ADR waits for approval. ADR-0001 is the visual direction. ADR-0002 is the PDF. ADR-0003 is the voice.
+GitHub Issues, then `docs/adr/`, then `GLOSSARY.md`, for decisions and words. The Catalog is the record of facts. Name things with the glossary's terms and none of its _Avoid_ words. A change that contradicts an ADR waits for approval. ADR-0001 is the visual direction. ADR-0002 is the PDF. ADR-0003 is the voice.
 
 ## Stack first
 
-Use Cloudflare Workers, TanStack Start, and shadcn before writing code or adding a library. This site has no database and no accounts. The Catalog in `src/catalog/portfolio.ts` is the record; a page is a view of it. Custom code that stays carries one line saying why the stack cannot do it.
+Use Cloudflare Workers, TanStack Start, and shadcn before writing code or adding a library. This site has no database and no accounts. Custom code that stays carries one line saying why the stack cannot do it.
 
 ## Design
 
