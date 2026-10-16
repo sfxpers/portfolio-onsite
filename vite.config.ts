@@ -23,6 +23,11 @@ export default defineConfig({
       typeCheck: true,
     },
   },
+  run: {
+    tasks: {
+      "check:tokens": "node scripts/check-tokens.mjs",
+    },
+  },
   resolve: { tsconfigPaths: true },
   server: { port: 3000 },
   preview: { port: 4173 },

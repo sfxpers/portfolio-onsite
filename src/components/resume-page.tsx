@@ -1,10 +1,12 @@
 import { Link } from "@tanstack/react-router";
+import { cn } from "cn";
 import type { ReactNode } from "react";
 
 import { identity } from "@/catalog/portfolio";
 import { RESUME_PDF_HREF, resumePdfDownloadName } from "@/catalog/resume-download";
 import { getResumeView, type ResumeSection } from "@/catalog/resume-view";
 import { PageShell } from "@/components/page-shell";
+import { buttonVariants } from "@/components/ui/button";
 
 export function ResumePage() {
   return (
@@ -16,7 +18,7 @@ export function ResumePage() {
             {identity.name}, {identity.role}
           </p>
         </div>
-        <a href={RESUME_PDF_HREF} download={resumePdfDownloadName()} className="button-primary">
+        <a href={RESUME_PDF_HREF} download={resumePdfDownloadName()} className={buttonVariants()}>
           Download PDF
         </a>
       </header>
@@ -55,7 +57,7 @@ function SectionBody({ section }: { section: ResumeSection }) {
             <li key={`${item.title}-${item.dates}`}>
               <Entry title={item.title} aside={<span className="figure">{item.dates}</span>} />
               <p className="text-sm text-muted-foreground">{item.subtitle}</p>
-              <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-foreground/85">
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-foreground/85">
                 {item.bullets.map((bullet) => (
                   <li key={bullet}>{bullet}</li>
                 ))}
@@ -76,7 +78,7 @@ function SectionBody({ section }: { section: ResumeSection }) {
                     to="/work/$slug"
                     params={{ slug: project.href.slice("/work/".length) }}
                     aria-label={`View case study for ${project.title}`}
-                    className="link text-sm"
+                    className={cn(buttonVariants({ variant: "link" }), "h-auto px-0 text-sm")}
                   >
                     {project.linkLabel}
                   </Link>
