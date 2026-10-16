@@ -1,5 +1,7 @@
 @import "@fontsource-variable/geist";
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 /* Every colour lives here. Teal is the one brand colour: links, focus, and the
    page's primary action. Neutrals carry everything else. */
@@ -12,6 +14,9 @@
   --primary: oklch(0.45 0.075 195);
   --primary-foreground: oklch(0.99 0.002 250);
   --border: oklch(0.9 0.006 250);
+  --ring: var(--primary);
+  /* 4px. The button's rounded-lg step resolves to this. */
+  --radius: 0.25rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,19 +40,16 @@
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-border: var(--border);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
 }
 
 /* Dates, years, and index numbers, in tabular figures so they align. */
 @utility figure {
   @apply text-xs text-muted-foreground tabular-nums;
-}
-
-@utility button-primary {
-  @apply inline-flex h-10 items-center rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90;
-}
-
-@utility link {
-  @apply text-primary underline-offset-4 hover:underline;
 }
 
 @layer base {

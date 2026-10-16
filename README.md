@@ -52,7 +52,7 @@ After changing `siteOrigin` or Catalog facts that appear in the PDF, push the br
 ## Stack
 
 - TanStack Start with file-based routing on Cloudflare Workers (`@cloudflare/vite-plugin` + Wrangler)
-- Tailwind CSS with locally defined semantic tokens
+- Tailwind CSS and shadcn, with colours and the radius in `src/styles.css`
 - Vite+ (Vite, Vitest, Oxlint, Oxfmt), Playwright, and axe
 
 Domain language: `GLOSSARY.md`. Product contract: `docs/adr/0001-craft-logbook-visual-direction.md`. Copy voice: `docs/adr/0003-plain-concrete-copy-voice.md`.

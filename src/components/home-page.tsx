@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { caseStudies, identity, profileHeading } from "@/catalog/portfolio";
 import { RESUME_PDF_HREF, resumePdfDownloadName } from "@/catalog/resume-download";
 import { PageShell } from "@/components/page-shell";
+import { buttonVariants } from "@/components/ui/button";
 
 const email = identity.contact.find((link) => link.kind === "email");
 
@@ -15,11 +16,15 @@ export function HomePage() {
         <p className="mt-6 text-base leading-relaxed text-foreground/85">{identity.bio}</p>
         <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
           {email ? (
-            <a href={email.href} className="button-primary">
+            <a href={email.href} className={buttonVariants()}>
               Email me
             </a>
           ) : null}
-          <a href={RESUME_PDF_HREF} download={resumePdfDownloadName()} className="link text-sm">
+          <a
+            href={RESUME_PDF_HREF}
+            download={resumePdfDownloadName()}
+            className={buttonVariants({ variant: "link" })}
+          >
             Download resume (PDF)
           </a>
         </div>
