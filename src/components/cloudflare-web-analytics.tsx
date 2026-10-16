@@ -1,7 +1,7 @@
 /**
  * Injects Cloudflare Web Analytics when a site token is configured.
  * Token is a public beacon token (not a server secret); set via
- * VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN in Workers Builds / local env.
+ * VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN as a repository variable or in the local env.
  */
 export function CloudflareWebAnalytics() {
   const token = import.meta.env.VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN;
