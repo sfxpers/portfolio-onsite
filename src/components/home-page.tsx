@@ -1,13 +1,11 @@
 import { Link } from "@tanstack/react-router";
 
-import { identity, listCaseStudies, profileHeading } from "@/catalog/portfolio";
+import { caseStudies, identity, profileHeading } from "@/catalog/portfolio";
 import { IdentityHeader } from "@/components/identity-header";
 import { PageShell } from "@/components/page-shell";
 import { ProfileSection } from "@/components/profile-section";
 
 export function HomePage() {
-  const caseStudies = listCaseStudies();
-
   return (
     <PageShell>
       <IdentityHeader label="Home" />

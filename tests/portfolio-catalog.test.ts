@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vite-plus/test";
 
-import { getCaseStudyBySlug, getResume, identity, listCaseStudies } from "@/catalog/portfolio";
+import { caseStudies, getCaseStudyBySlug, getResume, identity } from "@/catalog/portfolio";
 
 describe("portfolio catalog", () => {
   it("exposes identity with name, role, bio, and Email/Threads/X contact shape", () => {
@@ -56,7 +56,6 @@ describe("portfolio catalog", () => {
 
   it("projects Resume Projects from Case Studies without outcome bullets", () => {
     const resume = getResume();
-    const caseStudies = listCaseStudies();
 
     expect(resume.projects).toEqual(
       caseStudies.map((study) => ({
@@ -71,13 +70,12 @@ describe("portfolio catalog", () => {
   });
 
   it("lists two to three Case Studies", () => {
-    const caseStudies = listCaseStudies();
     expect(caseStudies.length).toBeGreaterThanOrEqual(2);
     expect(caseStudies.length).toBeLessThanOrEqual(3);
   });
 
   it("gives each Case Study a slug, Capsule fields, and at least one Showcase", () => {
-    for (const study of listCaseStudies()) {
+    for (const study of caseStudies) {
       expect(study.slug.length).toBeGreaterThan(0);
       expect(study.indexSummary.length).toBeGreaterThan(0);
       expect(study.capsule.problem.length).toBeGreaterThan(0);
@@ -95,7 +93,7 @@ describe("portfolio catalog", () => {
   });
 
   it("includes peer-depth technical text in every Case Study body", () => {
-    for (const study of listCaseStudies()) {
+    for (const study of caseStudies) {
       const technicalBlocks = study.body.filter(
         (block) => block.type === "text" && block.depth === "technical",
       );
@@ -112,7 +110,7 @@ describe("portfolio catalog", () => {
   });
 
   it("alternates text and Showcase blocks in every Case Study body", () => {
-    for (const study of listCaseStudies()) {
+    for (const study of caseStudies) {
       expect(study.body.length).toBeGreaterThan(0);
       expect(study.body[0]?.type).toBe("text");
       expect(study.body.at(-1)?.type).toBe("showcase");
@@ -126,7 +124,7 @@ describe("portfolio catalog", () => {
   });
 
   it("returns a Case Study for a known slug and nothing for an unknown slug", () => {
-    const [first] = listCaseStudies();
+    const [first] = caseStudies;
     expect(first).toBeDefined();
     expect(getCaseStudyBySlug(first!.slug)).toEqual(first);
     expect(getCaseStudyBySlug("does-not-exist")).toBeUndefined();

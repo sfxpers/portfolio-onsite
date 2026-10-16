@@ -201,7 +201,7 @@ const education: Education[] = [
   },
 ];
 
-const caseStudies: CaseStudy[] = [
+export const caseStudies: CaseStudy[] = [
   {
     slug: "ecobuiltconnect",
     title: "EcoBuiltConnect",
@@ -573,10 +573,6 @@ const caseStudies: CaseStudy[] = [
     ],
   },
 ];
-
-export function listCaseStudies(): CaseStudy[] {
-  return caseStudies;
-}
 
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
   return caseStudies.find((study) => study.slug === slug);
