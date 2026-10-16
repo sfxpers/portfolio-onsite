@@ -5,7 +5,6 @@ Seam-first: Vitest covers public module seams; Playwright covers pages after a r
 ## Vitest owns
 
 - Catalog **product rules** (shape, bands, degree-only education, technical depth, body alternation) — not biography or URL literals
-- `COLOR_SCHEME_SCRIPT` behavior
 - Resume print-HTML smoke (headings, absolute project links, escapes, degree-only forbids)
 - Committed Resume PDF byte-lock (`vp run resume:pdf` regenerates it; `vp test` fails on drift)
 
@@ -15,7 +14,7 @@ Seam-first: Vitest covers public module seams; Playwright covers pages after a r
 - Home mobile fit; Home Profile must not surface Karachi
 - axe on Home, Case Study, and Resume
 - PDF HTTP serve + removal of `/resume/ats.html`
-- `prefers-reduced-motion` transition collapse
+- The OS colour scheme and `prefers-reduced-motion`
 
 ## Do not add
 

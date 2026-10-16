@@ -12,7 +12,7 @@ export default defineConfig({
     ignorePatterns: [".agents/**", "src/routeTree.gen.ts", "public/resume/download.pdf"],
   },
   lint: {
-    plugins: ["typescript", "react", "unicorn", "oxc", "import", "jsx-a11y"],
+    plugins: ["typescript", "react", "unicorn", "oxc", "import", "vitest", "jsx-a11y"],
     // A correctness finding fails the check; a warning would not.
     categories: {
       correctness: "error",
