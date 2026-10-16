@@ -1,0 +1,28 @@
+name: Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    # macOS, because the Resume PDF byte-lock (ADR-0002) only holds on the
+    # platform that printed it: Linux Chromium measures the same embedded
+    # font through FreeType, not CoreText, and lays the page out differently.
+    runs-on: macos-latest
+    # A hung step fails within the hour, not at GitHub's six.
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      # The v1 tag is frozen and no longer moves.
+      - uses: voidzero-dev/setup-vp@v1.21.2
+        with:
+          node-version-file: .node-version
+          cache: true
+      - run: vp check
+      # Before Vitest too: the Resume PDF test prints through Chromium.
+      - run: vp exec playwright install --with-deps chromium webkit
+      - run: vp test run
+      - run: vp run test:e2e
+        timeout-minutes: 15

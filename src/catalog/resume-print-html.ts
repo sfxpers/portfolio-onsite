@@ -1,3 +1,7 @@
+import geist400 from "@fontsource/geist/files/geist-latin-400-normal.woff2?inline";
+import geist700 from "@fontsource/geist/files/geist-latin-700-normal.woff2?inline";
+import geist800 from "@fontsource/geist/files/geist-latin-800-normal.woff2?inline";
+
 import { identity, siteOrigin } from "@/catalog/portfolio";
 import { getResumeView, type ResumeSection } from "@/catalog/resume-view";
 
@@ -120,6 +124,27 @@ export function renderResumePrintHtml(): string {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${escapeHtml(identity.name)} - ${escapeHtml(identity.role)}</title>
     <style>
+      /* Inlined, so the PDF does not depend on the OS's fonts. Static weights,
+         because Skia embeds those as TrueType subsets but draws a variable
+         font as Type3 outlines. */
+      @font-face {
+        font-family: "Geist Print";
+        font-weight: 400;
+        src: url(${geist400}) format("woff2");
+      }
+
+      @font-face {
+        font-family: "Geist Print";
+        font-weight: 700;
+        src: url(${geist700}) format("woff2");
+      }
+
+      @font-face {
+        font-family: "Geist Print";
+        font-weight: 800;
+        src: url(${geist800}) format("woff2");
+      }
+
       @page {
         size: A4;
         margin: 14mm;
@@ -133,7 +158,7 @@ export function renderResumePrintHtml(): string {
         margin: 0;
         background: #fff;
         color: #111;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: "Geist Print";
         font-size: 10.5px;
         line-height: 1.35;
       }

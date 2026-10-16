@@ -25,7 +25,9 @@ vp run resume:pdf     # regenerate public/resume/download.pdf after Catalog chan
 vp run deploy         # build and deploy with Wrangler (vp exec wrangler login first)
 ```
 
-`vp test` fails when the committed Resume PDF drifts from the Catalog. Testing policy (seam-first layers, what not to add): [`docs/testing.md`](docs/testing.md).
+`vp test` fails when the committed Resume PDF drifts from the Catalog. The PDF embeds Geist rather than using system fonts, but Chromium still prints different bytes on Linux, so regenerate it on macOS.
+
+CI ([`.github/workflows/check.yml`](.github/workflows/check.yml)) runs `vp check`, `vp test run`, and `vp run test:e2e` on macOS for every pull request and every push to `main`. Testing policy (seam-first layers, what not to add): [`docs/testing.md`](docs/testing.md).
 
 ## Deploy
 
