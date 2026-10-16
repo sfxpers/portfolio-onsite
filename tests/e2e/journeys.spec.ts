@@ -37,9 +37,12 @@ test("Resume shows its sections in order and downloads the PDF under the Identit
     "Education",
   ]);
 
+  // The attribute, not suggestedFilename(): Linux WebKit swaps its spaces for underscores.
+  const downloadLink = page.getByRole("link", { name: "Download PDF" });
+  await expect(downloadLink).toHaveAttribute("download", "Shayan - Product Engineer.pdf");
   const download = page.waitForEvent("download");
-  await page.getByRole("link", { name: "Download PDF" }).click();
-  expect((await download).suggestedFilename()).toBe("Shayan - Product Engineer.pdf");
+  await downloadLink.click();
+  await download;
 
   const pdf = await page.request.get("/resume/download.pdf");
   expect(pdf.headers()["content-type"]).toMatch(/application\/pdf/);
