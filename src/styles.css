@@ -1,5 +1,4 @@
 @import "@fontsource-variable/geist";
-@import "@fontsource-variable/geist-mono";
 @import "tailwindcss";
 
 /* Every colour lives here. Teal is the one brand colour: links, focus, and the
@@ -29,7 +28,6 @@
 
 @theme inline {
   --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
@@ -39,9 +37,9 @@
   --color-border: var(--border);
 }
 
-/* Dates, years, and index numbers: the only place Geist Mono appears. */
+/* Dates, years, and index numbers, in tabular figures so they align. */
 @utility figure {
-  @apply font-mono text-xs text-muted-foreground tabular-nums;
+  @apply text-xs text-muted-foreground tabular-nums;
 }
 
 @utility button-primary {
