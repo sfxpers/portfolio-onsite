@@ -2,6 +2,18 @@
 
 Personal product-engineer portfolio for Shayan: Home (work index), Case Studies, and Resume.
 
+Each thing is written down once:
+
+| What                      | Where                           |
+| ------------------------- | ------------------------------- |
+| What the product does     | GitHub Issues, then `docs/adr/` |
+| The words it uses         | `GLOSSARY.md`                   |
+| How code is judged        | `CODING_STANDARDS.md`           |
+| What agents need          | `AGENTS.md`                     |
+| Bindings and environments | `wrangler.jsonc`                |
+| Colours, radius, and type | `src/styles.css`                |
+| Catalog facts             | `src/catalog/portfolio.ts`      |
+
 ## Setup
 
 [Vite+](https://viteplus.dev) (`vp`) runs everything: it uses the Node in `.node-version` and the pnpm in `package.json`, and ships Vite, Vitest, Oxlint, and Oxfmt as one set, pinned in `pnpm-workspace.yaml`. `vp install` also sets up the pre-commit hook, which checks what is staged. `postinstall` writes `worker-configuration.d.ts` from `wrangler.jsonc` (`vp run cf-typegen` after changing it).
@@ -54,5 +66,3 @@ After changing `siteOrigin` or Catalog facts that appear in the PDF, push the br
 - TanStack Start with file-based routing on Cloudflare Workers (`@cloudflare/vite-plugin` + Wrangler)
 - Tailwind CSS and shadcn, with colours and the radius in `src/styles.css`
 - Vite+ (Vite, Vitest, Oxlint, Oxfmt), Playwright, and axe
-
-Domain language: `GLOSSARY.md`. Product contract: `docs/adr/0001-craft-logbook-visual-direction.md`. Copy voice: `docs/adr/0003-plain-concrete-copy-voice.md`.
