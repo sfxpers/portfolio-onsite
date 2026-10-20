@@ -59,3 +59,6 @@ playwright/.cache
 .worktrees
 .void-wrangler.jsonc
 .void
+
+# Cursor local agent state
+.cursor
