@@ -10,13 +10,13 @@ Each thing is written down once:
 | The words it uses         | `GLOSSARY.md`                   |
 | How code is judged        | `CODING_STANDARDS.md`           |
 | What agents need          | `AGENTS.md`                     |
-| Bindings and environments | `wrangler.jsonc`                |
+| Bindings and environments | `void.config.ts`                |
 | Colours, radius, and type | `src/styles.css`                |
 | Catalog facts             | `src/catalog/portfolio.ts`      |
 
 ## Setup
 
-[Vite+](https://viteplus.dev) (`vp`) runs everything: it uses the Node in `.node-version` and the pnpm in `package.json`, and ships Vite, Vitest, Oxlint, and Oxfmt as one set, pinned in `pnpm-workspace.yaml`. `vp install` also sets up the pre-commit hook, which checks what is staged. `postinstall` writes `worker-configuration.d.ts` from `wrangler.jsonc` (`vp run cf-typegen` after changing it).
+[Vite+](https://viteplus.dev) (`vp`) runs everything: it uses the Node in `.node-version` and the pnpm in `package.json`, and ships Vite, Vitest, Oxlint, and Oxfmt as one set, pinned in `pnpm-workspace.yaml`. `vp install` also sets up the pre-commit hook, which checks what is staged. `postinstall` runs `void prepare` for Void codegen.
 
 ```sh
 curl -fsSL https://vite.plus | bash   # once per machine
@@ -35,7 +35,7 @@ vp run test:smoke    # builds, then Playwright and axe against the preview serve
 vp build              # Cloudflare Workers production build
 vp preview            # the production build, locally
 vp run resume:pdf     # print public/resume/download.pdf locally, to preview Catalog changes
-vp run deploy         # build and deploy with Wrangler (vp exec wrangler login first)
+vp run deploy         # void deploy --platform cloudflare
 ```
 
 The committed Resume PDF is a Linux print. Chromium prints different bytes on macOS, even with Geist embedded, so `vp test` compares bytes only on Linux and skips that comparison on a Mac. CI enforces it: Check fails when the committed PDF drifts from the Catalog.
@@ -57,12 +57,12 @@ The job reads these from the repository's **Settings → Secrets and variables �
 | `VITE_SITE_ORIGIN`                    | Variable | Optional; overrides the Catalog's `siteOrigin` (`https://shayanameen.dev`) |
 | `VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN` | Variable | Optional; Cloudflare Web Analytics beacon token                            |
 
-`vp run deploy` also works from a laptop after `vp exec wrangler login`.
+`vp run deploy` also works from a laptop after `void cloudflare login` (or `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID`).
 
 After changing `siteOrigin` or Catalog facts that appear in the PDF, push the branch and run the Resume PDF workflow on it (Actions → Resume PDF → Run workflow, or `gh workflow run resume-pdf.yml --ref <branch>`), then pull its commit. Don't commit a PDF printed on a Mac: Check on Linux would fail it.
 
 ## Stack
 
-- TanStack Start with file-based routing on Cloudflare Workers (`@cloudflare/vite-plugin` + Wrangler)
+- TanStack Start with file-based routing on Cloudflare Workers (Void for resources + deploy)
 - Tailwind CSS and shadcn, with colours and the radius in `src/styles.css`
 - Vite+ (Vite, Vitest, Oxlint, Oxfmt), Playwright, and axe
