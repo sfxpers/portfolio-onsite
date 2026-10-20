@@ -57,3 +57,5 @@ playwright/.cache
 
 # Agent worktrees
 .worktrees
+.void-wrangler.jsonc
+.void
