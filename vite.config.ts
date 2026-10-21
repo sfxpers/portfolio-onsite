@@ -9,7 +9,12 @@ export default defineConfig({
     "*": "vp check --fix",
   },
   fmt: {
-    ignorePatterns: [".agents/**", "src/routeTree.gen.ts", "public/resume/download.pdf"],
+    ignorePatterns: [
+      ".agents/**",
+      "**/routeTree.gen.ts",
+      "public/resume/download.pdf",
+      "void.lock.json",
+    ],
   },
   lint: {
     plugins: ["typescript", "react", "unicorn", "oxc", "import", "vitest", "jsx-a11y"],
@@ -17,7 +22,7 @@ export default defineConfig({
     categories: {
       correctness: "error",
     },
-    ignorePatterns: [".agents/**", "src/routeTree.gen.ts"],
+    ignorePatterns: [".agents/**", "**/routeTree.gen.ts"],
     options: {
       typeAware: true,
       typeCheck: true,
