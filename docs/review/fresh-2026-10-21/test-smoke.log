@@ -1,0 +1,143 @@
++ vp run test:smoke
+$ vp build ⊘ cache disabled
+transforming...
+✓ 184 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/client/.assetsignore                                           0.02 kB
+dist/client/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2    7.42 kB
+dist/client/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2      8.00 kB
+dist/client/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2       15.08 kB
+dist/client/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2      16.51 kB
+dist/client/assets/geist-latin-wght-normal-BgDaEnEv.woff2          29.40 kB
+dist/client/assets/styles-DDgb5qX0.css                             27.90 kB │ gzip:  6.33 kB
+dist/client/assets/resume-download-DP-ycmqa.js                      0.14 kB │ gzip:  0.13 kB
+dist/client/assets/_slug-B7WPujXJ.js                                0.29 kB │ gzip:  0.24 kB
+dist/client/assets/routes-BjKGD1Os.js                               1.85 kB │ gzip:  0.80 kB
+dist/client/assets/_slug-CSMyPsGY.js                                2.88 kB │ gzip:  1.10 kB
+dist/client/assets/resume-BJN5_kj5.js                               3.11 kB │ gzip:  1.03 kB
+dist/client/assets/dist-Bcow9Ss5.js                                25.83 kB │ gzip: 10.70 kB
+dist/client/assets/page-shell-kmn65T2p.js                          94.98 kB │ gzip: 34.25 kB
+dist/client/assets/index-OrLEpOKB.js                              274.14 kB │ gzip: 86.43 kB
+
+✓ built in 217ms
+transforming...
+✓ 248 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/server/wrangler.json                                           1.61 kB │ gzip:   0.79 kB
+dist/server/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2    7.42 kB
+dist/server/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2      8.00 kB
+dist/server/.vite/manifest.json                                     8.18 kB │ gzip:   1.19 kB
+dist/server/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2       15.08 kB
+dist/server/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2      16.51 kB
+dist/server/assets/geist-latin-wght-normal-BgDaEnEv.woff2          29.40 kB
+dist/server/assets/styles-DDgb5qX0.css                             27.90 kB │ gzip:   6.33 kB
+dist/server/assets/start-C63VetBp.js                                0.08 kB │ gzip:   0.10 kB │ map:     0.44 kB
+dist/server/assets/empty-plugin-adapters-BaGcmrjC.js                0.13 kB │ gzip:   0.13 kB │ map:     0.62 kB
+dist/server/assets/resume-download-aKmQzcdA.js                      0.19 kB │ gzip:   0.18 kB │ map:     0.77 kB
+dist/server/assets/_slug-C__jHbxf.js                                0.33 kB │ gzip:   0.28 kB │ map:     1.89 kB
+dist/server/assets/rolldown-runtime-hePW80VL.js                     0.71 kB │ gzip:   0.42 kB
+dist/server/assets/_tanstack-start-manifest_v-CPp8Dhy2.js           0.93 kB │ gzip:   0.38 kB
+dist/server/assets/ClientOnly-QVzth6RX.js                           1.16 kB │ gzip:   0.62 kB │ map:     5.63 kB
+dist/server/assets/routes-BWflrMaw.js                               1.94 kB │ gzip:   0.86 kB │ map:     5.02 kB
+dist/server/assets/useSelector-B1D8_7pk.js                          2.00 kB │ gzip:   0.90 kB │ map:    12.14 kB
+dist/server/assets/_slug-D1Eocwo2.js                                2.95 kB │ gzip:   1.15 kB │ map:     8.38 kB
+dist/server/assets/resume-B_yzulcw.js                               3.23 kB │ gzip:   1.11 kB │ map:     8.67 kB
+dist/server/assets/button-SXkyAzmJ.js                               3.47 kB │ gzip:   1.33 kB │ map:     9.40 kB
+dist/server/assets/router-AWQ0YVL8.js                              14.23 kB │ gzip:   5.26 kB │ map:    91.12 kB
+dist/server/assets/page-shell-CxJvD4wO.js                          24.92 kB │ gzip:   9.55 kB │ map:    55.27 kB
+dist/server/assets/dist-Bcow9Ss5.js                                25.87 kB │ gzip:  10.74 kB │ map:    80.09 kB
+dist/server/assets/matchContext-D-uw3KF9.js                        59.60 kB │ gzip:  20.73 kB │ map:   323.29 kB
+dist/server/index.js                                              333.64 kB │ gzip: 104.11 kB │ map: 1,524.31 kB
+
+[plugin vite:css-post] [SOURCEMAP_BROKEN] Sourcemap is likely to be incorrect: a plugin (vite:css-post) was used to transform files, but didn't generate a sourcemap for the transformation. Consult the plugin documentation for help: https://rolldown.rs/guide/troubleshooting#warning-sourcemap-is-likely-to-be-incorrect
+
+✓ built in 148ms
+
+$ playwright test ⊘ cache disabled
+[WebServer]   ➜  Local:   http://127.0.0.1:4173/
+[WebServer]   ➜  Debug:   http://127.0.0.1:4173/__debug
+[WebServer] GET / 200 OK (35ms)
+
+Running 8 tests using 1 worker
+
+  ✘  1 tests/e2e/accessibility.spec.ts:13:3 › every screen passes axe in light (0ms)
+  ✘  2 tests/e2e/accessibility.spec.ts:13:3 › every screen passes axe in dark (0ms)
+  ✘  3 tests/e2e/journeys.spec.ts:3:1 › Home → Case Study → next Case Study → Resume → Home (0ms)
+  ✘  4 tests/e2e/journeys.spec.ts:27:1 › Resume shows its sections in order and downloads the PDF under the Identity name (0ms)
+  ✘  5 tests/e2e/journeys.spec.ts:51:1 › unknown and retired URLs say so and lead home (0ms)
+  ✘  6 tests/e2e/journeys.spec.ts:66:1 › Home fits small phones and keeps location off the Profile (0ms)
+  ✘  7 tests/e2e/preferences.spec.ts:3:1 › follows the OS colour scheme, with no toggle (0ms)
+  ✘  8 tests/e2e/preferences.spec.ts:14:1 › sparse UI transitions collapse under prefers-reduced-motion (0ms)
+
+
+  1) tests/e2e/accessibility.spec.ts:13:3 › every screen passes axe in light ───────────────────────
+
+    Error: browserType.launch: Chromium distribution 'chrome' is not found at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+    Run "pnpm exec playwright install chrome"
+
+    Error Context: test-results/accessibility-every-screen-passes-axe-in-light/error-context.md
+
+  2) tests/e2e/accessibility.spec.ts:13:3 › every screen passes axe in dark ────────────────────────
+
+    Error: browserType.launch: Chromium distribution 'chrome' is not found at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+    Run "pnpm exec playwright install chrome"
+
+    Error Context: test-results/accessibility-every-screen-passes-axe-in-dark/error-context.md
+
+  3) tests/e2e/journeys.spec.ts:3:1 › Home → Case Study → next Case Study → Resume → Home ──────────
+
+    Error: browserType.launch: Chromium distribution 'chrome' is not found at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+    Run "pnpm exec playwright install chrome"
+
+    Error Context: test-results/journeys-Home-→-Case-Study-→-next-Case-Study-→-Resume-→-Home/error-context.md
+
+  4) tests/e2e/journeys.spec.ts:27:1 › Resume shows its sections in order and downloads the PDF under the Identity name 
+
+    Error: browserType.launch: Chromium distribution 'chrome' is not found at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+    Run "pnpm exec playwright install chrome"
+
+    Error Context: test-results/journeys-Resume-shows-its--8ba13-PDF-under-the-Identity-name/error-context.md
+
+  5) tests/e2e/journeys.spec.ts:51:1 › unknown and retired URLs say so and lead home ───────────────
+
+    Error: browserType.launch: Chromium distribution 'chrome' is not found at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+    Run "pnpm exec playwright install chrome"
+
+    Error Context: test-results/journeys-unknown-and-retired-URLs-say-so-and-lead-home/error-context.md
+
+  6) tests/e2e/journeys.spec.ts:66:1 › Home fits small phones and keeps location off the Profile ───
+
+    Error: browserType.launch: Chromium distribution 'chrome' is not found at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+    Run "pnpm exec playwright install chrome"
+
+    Error Context: test-results/journeys-Home-fits-small-p-4a7ff-ps-location-off-the-Profile/error-context.md
+
+  7) tests/e2e/preferences.spec.ts:3:1 › follows the OS colour scheme, with no toggle ──────────────
+
+    Error: browserType.launch: Chromium distribution 'chrome' is not found at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+    Run "pnpm exec playwright install chrome"
+
+    Error Context: test-results/preferences-follows-the-OS-colour-scheme-with-no-toggle/error-context.md
+
+  8) tests/e2e/preferences.spec.ts:14:1 › sparse UI transitions collapse under prefers-reduced-motion 
+
+    Error: browserType.launch: Chromium distribution 'chrome' is not found at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+    Run "pnpm exec playwright install chrome"
+
+    Error Context: test-results/preferences-sparse-UI-tran-d9927-nder-prefers-reduced-motion/error-context.md
+
+  8 failed
+    tests/e2e/accessibility.spec.ts:13:3 › every screen passes axe in light ────────────────────────
+    tests/e2e/accessibility.spec.ts:13:3 › every screen passes axe in dark ─────────────────────────
+    tests/e2e/journeys.spec.ts:3:1 › Home → Case Study → next Case Study → Resume → Home ───────────
+    tests/e2e/journeys.spec.ts:27:1 › Resume shows its sections in order and downloads the PDF under the Identity name 
+    tests/e2e/journeys.spec.ts:51:1 › unknown and retired URLs say so and lead home ────────────────
+    tests/e2e/journeys.spec.ts:66:1 › Home fits small phones and keeps location off the Profile ────
+    tests/e2e/preferences.spec.ts:3:1 › follows the OS colour scheme, with no toggle ───────────────
+    tests/e2e/preferences.spec.ts:14:1 › sparse UI transitions collapse under prefers-reduced-motion 
+
+---
+vp run: 1/2 successful. (Run `vp run --last-details` for full details)
+EXIT(1) >> /Users/sfx/phase1-evidence/logs/portfolio-onsite/test-smoke.log
