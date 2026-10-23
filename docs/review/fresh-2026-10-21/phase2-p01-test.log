@@ -1,0 +1,15 @@
+
+ RUN  v5.0.4 /Users/sfx/phase1-evidence/checkouts-p01/portfolio-onsite
+
+ ↓ tests/resume-pdf.test.ts > Resume PDF > keeps the committed public PDF aligned with buildResumePdf 1ms [The committed PDF is a Linux print: Check on Linux enforces this (.github/workflows/resume-pdf.yml regenerates it)]
+ ✓ tests/resume-pdf.test.ts > Resume PDF > is a single-page PDF document at the public path 1ms
+ ✓ tests/resume-pdf.test.ts > Resume PDF > keeps every xref entry of the committed PDF pointing at its object 1ms
+ ✓ tests/resume-pdf.test.ts > Resume PDF > produces a structurally valid xref table on a local print 583ms
+ ✓ tests/resume-pdf.test.ts > Resume PDF > zeroes volatile metadata without changing byte length or layout 0ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed | 1 skipped (5)
+   Start at  21:47:46
+   Duration  844ms (tests 75%, import 21%, transform 3%)
+
+EXIT:0
