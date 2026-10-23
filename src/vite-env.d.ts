@@ -1,9 +1,8 @@
 /// <reference types="vite/client" />
 
-interface ImportMetaEnv {
-  readonly VITE_SITE_ORIGIN?: string;
-  readonly VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN?: string;
-}
+type ClientEnv = typeof import("../env").default;
+
+interface ImportMetaEnv extends ClientEnv {}
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;

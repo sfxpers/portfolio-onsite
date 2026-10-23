@@ -16,7 +16,7 @@ Each thing is written down once:
 
 ## Setup
 
-[Vite+](https://viteplus.dev) (`vp`) runs everything: it uses the Node in `.node-version` and the pnpm in `package.json`, and ships Vite, Vitest, Oxlint, and Oxfmt as one set, pinned in `pnpm-workspace.yaml`. `vp install` also sets up the pre-commit hook, which checks what is staged. `postinstall` runs `void prepare` for Void codegen.
+[Vite+](https://viteplus.dev) (`vp`) runs everything: it uses the Node in `.node-version` and the pnpm in `package.json`, and ships Vite, Vitest, Oxlint, and Oxfmt as one set, pinned in `pnpm-workspace.yaml`. `vp install` also sets up the pre-commit hook, which checks what is staged. `postinstall` runs `void prepare` for Void codegen. Run Void's own commands through `vp exec void ...`; its docs ship in `node_modules/void/docs/` (start with `guide/quickstart.md` and `reference/cli.md`). Upgrade shared dependencies together; read the docs shipped with the installed version.
 
 ```sh
 curl -fsSL https://vite.plus | bash   # once per machine
@@ -57,12 +57,14 @@ The job reads these from the repository's **Settings → Secrets and variables �
 | `VITE_SITE_ORIGIN`                    | Variable | Optional; overrides the Catalog's `siteOrigin` (`https://shayanameen.dev`) |
 | `VITE_CLOUDFLARE_WEB_ANALYTICS_TOKEN` | Variable | Optional; Cloudflare Web Analytics beacon token                            |
 
-`vp run deploy` also works from a laptop after `void cloudflare login` (or `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID`).
+`vp run deploy` also works from a laptop after `vp exec void cloudflare login` (or `CLOUDFLARE_API_TOKEN` + `CLOUDFLARE_ACCOUNT_ID`).
+
+`env.ts` declares only client `VITE_*` build values; this site has no server secrets. Their production values come from the deploy shell (the CI variables above) — builds ignore `VITE_*` values in `.env`, which stays a local development file that is never committed or uploaded. `import.meta.env` access (typed from `env.ts`) stays because the Resume PDF runner imports Catalog outside a Void request context.
 
 After changing `siteOrigin` or Catalog facts that appear in the PDF, push the branch and run the Resume PDF workflow on it (Actions → Resume PDF → Run workflow, or `gh workflow run resume-pdf.yml --ref <branch>`), then pull its commit. Don't commit a PDF printed on a Mac: Check on Linux would fail it.
 
 ## Stack
 
 - TanStack Start with file-based routing on Cloudflare Workers (Void for resources + deploy)
-- Tailwind CSS and shadcn, with colours and the radius in `src/styles.css`
+- Tailwind CSS and shadcn, with colours and the radius in `src/styles.css` (add a component: `vp exec shadcn add <name>`)
 - Vite+ (Vite, Vitest, Oxlint, Oxfmt), Playwright, and axe
